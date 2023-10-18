@@ -1,0 +1,141 @@
+- file_name: weight
+  title: "体重"
+  key: &date
+    name: "日期"
+    unit: NULL
+    type: date
+  values:
+    - weight:
+        name: "体重"
+        unit: kg
+        type: float
+  date_unique: True
+- file_name: diet
+  title: "饮食"
+  key:
+    *date
+  values:
+    - cat_food:
+        name: "猫粮"
+        unit: g
+        type: int
+    - cat_stripe:
+        name: "猫条"
+        unit: "根"
+        type: int
+    - staple_can:
+        name: "主食罐头"
+        unit: "罐"
+        type: float
+    - snack_can:
+        name: "零食罐头"
+        unit: "罐"
+        type: float
+    - breast:
+        name: "鸡胸肉"
+        unit: "块"
+        type: float
+    - yolk:
+        name: "蛋黄"
+        unit: "个"
+        type: float
+    - water:
+        name: "水"
+        unit: mL
+        type: int
+  date_unique: True
+- file_name: excrete
+  title: "排泄"
+  key:
+    *date
+  values:
+    - stool:
+        name: "大便"
+        unit: "次"
+        type: int
+    - urinate:
+        name: "小便"
+        unit: "次"
+        type: int
+- file_name: stool
+  title: "大便"
+  key: &index
+    name: "序号"
+    unit: NULL
+    type: int
+  values:
+    - date:
+        *date
+    - status: &status
+        name: "状态"
+        unit: NULL
+        type: string
+- file_name: urinate
+  title: "小便"
+  key:
+    *index
+  values:
+    - date:
+        *date
+    - status:
+        *status
+- file_name: medical
+  title: "用药"
+  key:
+    *index
+  values:
+    - date:
+        *date
+    - symptom:
+        name: "症状"
+        unit: NULL
+        type: string
+    - medicine:
+        name: "药品"
+        unit: NULL
+        type: string
+    - dose:
+        name: "剂量"
+        unit: NULL
+        type: float
+- file_name: caring
+  title: "洗护"
+  key:
+    *index
+  values:
+    - date:
+        *date
+    - item:
+        name: "项目"
+        unit: NULL
+        type: string
+- file_name: environment
+  title: "环境清洁"
+  key:
+    *index
+  values:
+    - date:
+        *date
+    - item:
+        name: "项目"
+        unit: NULL
+        type: string
+- file_name: bill
+  title: "账单"
+  key:
+    *index
+  values:
+    - date:
+        *date
+    - category:
+        name: "类别"
+        unit: NULL
+        type: string
+    - name:
+        name: "名称"
+        unit: NULL
+        type: string
+    - amount:
+        name: "金额"
+        unit: RMB
+        type: float
