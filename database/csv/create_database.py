@@ -4,17 +4,15 @@ import pandas as pd
 
 from database.utils import load_yaml
 
-tables_config_path = Path('../../tables.yml')
-save_dir = Path('./tables')
-
 
 def create_tables_dir_if_necessary(path):
-    if not save_dir.exists():
-        save_dir.mkdir()
+    path = Path(path)
+    if not path.exists():
+        path.mkdir()
 
 
-if __name__ == '__main__':
-    tables_config = load_yaml(tables_config_path)
+def create_tables(yaml_path, save_dir):
+    tables_config = load_yaml(yaml_path)
 
     create_tables_dir_if_necessary(save_dir)
 
@@ -26,4 +24,5 @@ if __name__ == '__main__':
         file_name = table_content['file_name'] + '.csv'
         save_file = Path(file_name)
         save_path = Path(save_dir, save_file)
-        empty_data_frame.to_csv(save_path, index=False)
+        if not save_path.exists():
+            empty_data_frame.to_csv(save_path, index=False)
