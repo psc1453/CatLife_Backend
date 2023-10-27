@@ -20,7 +20,7 @@ def get_table_from_cursor(cursor: cursors.Cursor):
 def generate_insert_sql_from_dict(table_name: str, insert_dict: dict):
     from functools import reduce
     sql_key_value_pair = reduce(
-        lambda old_pair, new_pair: (', '.join((old_pair[0], new_pair[0])), ', '.join((old_pair[1], new_pair[1]))),
+        lambda old_pair, new_pair: (', '.join((old_pair[0], new_pair[0])), ', '.join((old_pair[1], str(new_pair[1])))),
         insert_dict.items())
     sql_insert_string = 'INSERT INTO {name} ({keys}) VALUES ({values})'.format(name=table_name,
                                                                                keys=sql_key_value_pair[0],
