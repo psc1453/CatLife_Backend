@@ -26,6 +26,7 @@ class TableWeight(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
+    # TODO: Add the delete and update functions.
     def delete_record(self, for_key: str):
         pass
 
