@@ -17,7 +17,7 @@ class DBTableProtocol(ABC):
         pass
 
     @abstractmethod
-    def fetch_table(self, option: str):
+    def fetch_record(self, for_key: str):
         pass
 
     @abstractmethod
@@ -25,5 +25,5 @@ class DBTableProtocol(ABC):
         pass
 
     @abstractmethod
-    def update_record(self, for_key: str,  new_dict: dict):
+    def update_record(self, for_key: str, new_dict: dict):
         pass
