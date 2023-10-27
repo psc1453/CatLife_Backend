@@ -1,0 +1,5 @@
+host: 'catlife.pscpeng.xyz'
+port: 33306
+name: 'CatLifeDev'
+user: 'dev'
+password: 'CatLife@Dev@Test'
