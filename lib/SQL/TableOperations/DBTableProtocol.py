@@ -4,9 +4,13 @@ from ..DB import DB
 
 
 class DBTableProtocol(ABC):
-    def __init__(self, db_instance: DB, table_name: str):
+    def __init__(self, db_instance: DB):
         self.db_instance = db_instance
-        self.table_name = table_name
+
+    @property
+    @abstractmethod
+    def table_name(self):
+        pass
 
     @abstractmethod
     def insert_record(self, insert_dict: dict):
@@ -14,4 +18,12 @@ class DBTableProtocol(ABC):
 
     @abstractmethod
     def fetch_table(self, option: str):
+        pass
+
+    @abstractmethod
+    def delete_record(self, for_key: str):
+        pass
+
+    @abstractmethod
+    def update_record(self, for_key: str,  new_dict: dict):
         pass
