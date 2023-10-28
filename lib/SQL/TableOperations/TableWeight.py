@@ -73,7 +73,6 @@ class TableWeight(DBTableProtocol):
                 WHERE record_date >= DATE('{date_start}')
                  AND record_date <= DATE('{date_end}')
             '''.format(table_name=self.table_name, date_start=interval_start, date_end=interval_end).strip()
-        print(command)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
