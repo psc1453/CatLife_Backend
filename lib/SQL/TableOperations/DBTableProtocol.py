@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Union
 
 from ..DB import DB
 
@@ -17,13 +18,13 @@ class DBTableProtocol(ABC):
         pass
 
     @abstractmethod
-    def fetch_record(self, for_key: str):
+    def fetch_record(self, for_key: Union[str, int]):
         pass
 
     @abstractmethod
-    def delete_record(self, for_key: str):
+    def delete_record(self, for_key: Union[str, int]):
         pass
 
     @abstractmethod
-    def update_record(self, for_key: str, new_dict: dict):
+    def update_record(self, for_key: Union[str, int], new_dict: dict):
         pass

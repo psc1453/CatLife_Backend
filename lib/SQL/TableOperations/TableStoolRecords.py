@@ -27,7 +27,7 @@ class TableStoolRecords(DBTableProtocol):
 
         self.db_instance.insert_table_by_dict(self.table_name, insert_dict)
 
-    def fetch_record(self, for_key: str):
+    def fetch_record(self, for_key: int):
         command = '''
             SELECT *
             FROM {table_name}
@@ -37,10 +37,10 @@ class TableStoolRecords(DBTableProtocol):
         return table
 
     # TODO: Add the delete and update functions.
-    def delete_record(self, for_key: str):
+    def delete_record(self, for_key: int):
         pass
 
-    def update_record(self, for_key: str, new_dict: dict):
+    def update_record(self, for_key: int, new_dict: dict):
         pass
 
     def add_stool_record(self, timestamp: str = None, status: Union[StoolStatus, str] = StoolStatus.normal,
@@ -64,7 +64,13 @@ class TableStoolRecords(DBTableProtocol):
         self.insert_record(insert_dict)
 
     def get_stool_records_by_timestamp(self, timestamp: str):
-        return self.fetch_record(timestamp)
+        command = '''
+                    SELECT *
+                    FROM {table_name}
+                    WHERE stool_timestamp = TIMESTAMP(\'{timestamp}\')
+                '''.format(table_name=self.table_name, timestamp=timestamp).strip()
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
 
     def get_stool_records_by_date(self, date: str):
         command = '''
