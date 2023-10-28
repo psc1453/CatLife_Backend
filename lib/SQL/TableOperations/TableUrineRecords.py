@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Union, Type
+from typing import Union
 
 from lib.SQL.DB import DB
 from lib.SQL.TableOperations.DBTableProtocol import DBTableProtocol
@@ -10,7 +10,7 @@ class UrineStatus(Enum):
     abnormal = 1
 
 
-class TableUrine(DBTableProtocol):
+class TableUrineRecords(DBTableProtocol):
     def __init__(self, db_instance: DB):
         super().__init__(db_instance)
 
@@ -103,7 +103,7 @@ class TableUrine(DBTableProtocol):
 
 def test():
     db = DB.from_yaml('../../../db_info.yml')
-    table_urine = TableUrine(db)
+    table_urine = TableUrineRecords(db)
 
     table_urine.add_urine_record(status=UrineStatus.abnormal)
     table_urine.add_urine_record(timestamp='2026-01-01 14:00:00', comment='hello Bentley')

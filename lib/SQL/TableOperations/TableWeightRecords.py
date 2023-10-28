@@ -2,7 +2,7 @@ from lib.SQL.DB import DB
 from lib.SQL.TableOperations.DBTableProtocol import DBTableProtocol
 
 
-class TableWeight(DBTableProtocol):
+class TableWeightRecords(DBTableProtocol):
     def __init__(self, db_instance: DB):
         super().__init__(db_instance)
 
@@ -78,7 +78,7 @@ class TableWeight(DBTableProtocol):
 
 def test():
     db = DB.from_yaml('../../../db_info.yml')
-    table_weight = TableWeight(db)
+    table_weight = TableWeightRecords(db)
 
     table_weight.add_weight_record(3.7, '2036-01-01')
 

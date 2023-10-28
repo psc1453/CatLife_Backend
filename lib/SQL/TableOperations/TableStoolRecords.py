@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Union, Type
+from typing import Union
 
 from lib.SQL.DB import DB
 from lib.SQL.TableOperations.DBTableProtocol import DBTableProtocol
@@ -12,7 +12,7 @@ class StoolStatus(Enum):
     liquid = 3
 
 
-class TableStool(DBTableProtocol):
+class TableStoolRecords(DBTableProtocol):
     def __init__(self, db_instance: DB):
         super().__init__(db_instance)
 
@@ -105,7 +105,7 @@ class TableStool(DBTableProtocol):
 
 def test():
     db = DB.from_yaml('../../../db_info.yml')
-    table_stool = TableStool(db)
+    table_stool = TableStoolRecords(db)
 
     table_stool.add_stool_record(status=StoolStatus.hard)
     table_stool.add_stool_record(timestamp='2026-01-01 14:00:00', comment='hello Bentley')
