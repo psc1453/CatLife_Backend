@@ -17,22 +17,26 @@ class TableStoolRecords(DBTableProtocol):
         super().__init__(db_instance)
 
     @property
-    def table_name(self):
+    def TABLE_NAME(self):
         return 'StoolRecords'
 
+    @property
+    def EDITABLE_COLUMNS(self):
+        return ['stool_timestamp', 'stool_status', 'stool_comment']
+
     def insert_record(self, insert_dict: dict):
-        assert all((key in ['stool_timestamp', 'stool_status', 'stool_comment']) for key in list(
+        assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), \
             'Find unsupported keys, only [stool_timestamp, stool_status, stool_comment] are supported'
 
-        self.db_instance.insert_table_by_dict(self.table_name, insert_dict)
+        self.db_instance.insert_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: int):
-        command = '''
+        command = f'''
             SELECT *
-            FROM {table_name}
-            WHERE stool_id = {id}
-        '''.format(table_name=self.table_name, id=for_key)
+            FROM {self.TABLE_NAME}
+            WHERE stool_id = {for_key}
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -64,47 +68,47 @@ class TableStoolRecords(DBTableProtocol):
         self.insert_record(insert_dict)
 
     def get_stool_records_by_timestamp(self, timestamp: str):
-        command = '''
-                    SELECT *
-                    FROM {table_name}
-                    WHERE stool_timestamp = TIMESTAMP(\'{timestamp}\')
-                '''.format(table_name=self.table_name, timestamp=timestamp)
+        command = f'''
+            SELECT *
+            FROM {self.TABLE_NAME}
+            WHERE stool_timestamp = TIMESTAMP(\'{timestamp}\')
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
     def get_stool_records_by_date(self, date: str):
-        command = '''
+        command = f'''
             SELECT * 
-            FROM {table_name}
+            FROM {self.TABLE_NAME}
             WHERE DATE(stool_timestamp) = DATE('{date}')
-        '''.format(table_name=self.table_name, date=date)
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
     def get_stool_records_by_interval(self, interval_start: str = None, interval_end: str = None):
         if (interval_start, interval_end) == (None, None):
-            command = '''
-                SELECT * FROM {table_name}
-            '''.format(table_name=self.table_name)
+            command = f'''
+                SELECT * FROM {self.TABLE_NAME}
+            '''
         elif interval_start is not None and interval_end is None:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE stool_timestamp >= TIMESTAMP('{timestamp_start}')
-            '''.format(table_name=self.table_name, timestamp_start=interval_start)
+                FROM {self.TABLE_NAME}
+                WHERE stool_timestamp >= TIMESTAMP('{interval_start}')
+            '''
         elif interval_start is None and interval_end is not None:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE stool_timestamp <= TIMESTAMP('{timestamp_end}')
-            '''.format(table_name=self.table_name, timestamp_end=interval_end)
+                FROM {self.TABLE_NAME}
+                WHERE stool_timestamp <= TIMESTAMP('{interval_end}')
+            '''
         else:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE stool_timestamp >= TIMESTAMP('{timestamp_start}')
-                 AND stool_timestamp <= TIMESTAMP('{timestamp_end}')
-            '''.format(table_name=self.table_name, timestamp_start=interval_start, timestamp_end=interval_end)
+                FROM {self.TABLE_NAME}
+                WHERE stool_timestamp >= TIMESTAMP('{interval_start}')
+                 AND stool_timestamp <= TIMESTAMP('{interval_end}')
+            '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 

@@ -18,15 +18,15 @@ def get_table_from_cursor(cursor: cursors.Cursor):
 
 
 def parse_sql_value_type(value):
-    if type(value) == int or type(value) == float:
+    if isinstance(value, (int, float)):
         return str(value)
-    elif type(value) == str:
-        if any([value.strip().upper().startswith(pattern) for pattern in ['DATE', 'TIME', 'TIMESTAMP']]):
+    elif isinstance(value, str):
+        if value.strip().upper().startswith(('DATE', 'TIME', 'TIMESTAMP')):
             return value
         else:
-            return '\'{content}\''.format(content=value)
+            return f'\'{value}\''
     else:
-        raise 'Unsupported value type!'
+        raise ValueError('Unsupported value type!')
 
 
 def generate_insert_sql_from_dict(table_name: str, insert_dict: dict):

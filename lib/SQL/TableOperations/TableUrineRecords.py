@@ -15,22 +15,26 @@ class TableUrineRecords(DBTableProtocol):
         super().__init__(db_instance)
 
     @property
-    def table_name(self):
+    def TABLE_NAME(self):
         return 'UrineRecords'
 
+    @property
+    def EDITABLE_COLUMNS(self):
+        return ['urine_timestamp', 'urine_status', 'urine_comment']
+
     def insert_record(self, insert_dict: dict):
-        assert all((key in ['urine_timestamp', 'urine_status', 'urine_comment']) for key in list(
+        assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), \
             'Find unsupported keys, only [urine_timestamp, urine_status, urine_comment] are supported'
 
-        self.db_instance.insert_table_by_dict(self.table_name, insert_dict)
+        self.db_instance.insert_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: int):
-        command = '''
+        command = f'''
             SELECT *
-            FROM {table_name}
-            WHERE urine_id = {id}
-        '''.format(table_name=self.table_name, id=for_key)
+            FROM {self.TABLE_NAME}
+            WHERE urine_id = {for_key}
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -62,47 +66,47 @@ class TableUrineRecords(DBTableProtocol):
         self.insert_record(insert_dict)
 
     def get_urine_records_by_timestamp(self, timestamp: str):
-        command = '''
+        command = f'''
                     SELECT *
-                    FROM {table_name}
+                    FROM {self.TABLE_NAME}
                     WHERE urine_timestamp = TIMESTAMP(\'{timestamp}\')
-        '''.format(table_name=self.table_name, timestamp=timestamp)
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
     def get_urine_records_by_date(self, date: str):
-        command = '''
+        command = f'''
             SELECT * 
-            FROM {table_name}
+            FROM {self.TABLE_NAME}
             WHERE DATE(urine_timestamp) = DATE('{date}')
-        '''.format(table_name=self.table_name, date=date)
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
     def get_urine_records_by_interval(self, interval_start: str = None, interval_end: str = None):
         if (interval_start, interval_end) == (None, None):
-            command = '''
-                SELECT * FROM {table_name}
-            '''.format(table_name=self.table_name)
+            command = f'''
+                SELECT * FROM {self.TABLE_NAME}
+            '''
         elif interval_start is not None and interval_end is None:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE urine_timestamp >= TIMESTAMP('{timestamp_start}')
-            '''.format(table_name=self.table_name, timestamp_start=interval_start)
+                FROM {self.TABLE_NAME}
+                WHERE urine_timestamp >= TIMESTAMP('{interval_start}')
+            '''
         elif interval_start is None and interval_end is not None:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE urine_timestamp <= TIMESTAMP('{timestamp_end}')
-            '''.format(table_name=self.table_name, timestamp_end=interval_end)
+                FROM {self.TABLE_NAME}
+                WHERE urine_timestamp <= TIMESTAMP('{interval_end}')
+            '''
         else:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE urine_timestamp >= TIMESTAMP('{timestamp_start}')
-                 AND urine_timestamp <= TIMESTAMP('{timestamp_end}')
-            '''.format(table_name=self.table_name, timestamp_start=interval_start, timestamp_end=interval_end)
+                FROM {self.TABLE_NAME}
+                WHERE urine_timestamp >= TIMESTAMP('{interval_start}')
+                 AND urine_timestamp <= TIMESTAMP('{interval_end}')
+            '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 

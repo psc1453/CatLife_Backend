@@ -10,7 +10,12 @@ class DBTableProtocol(ABC):
 
     @property
     @abstractmethod
-    def table_name(self):
+    def TABLE_NAME(self):
+        pass
+
+    @property
+    @abstractmethod
+    def EDITABLE_COLUMNS(self):
         pass
 
     @abstractmethod

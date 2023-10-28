@@ -7,22 +7,26 @@ class TableFoodList(DBTableProtocol):
         super().__init__(db_instance)
 
     @property
-    def table_name(self):
+    def TABLE_NAME(self):
         return 'FoodList'
 
+    @property
+    def EDITABLE_COLUMNS(self):
+        return ['food_brand', 'food_name', 'food_category', 'food_unit']
+
     def insert_record(self, insert_dict: dict):
-        assert all((key in ['food_brand', 'food_name', 'food_category', 'food_unit']) for key in list(
+        assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), \
             'Find unsupported keys, only [food_brand, food_name, food_category, food_unit] are supported'
 
-        self.db_instance.insert_table_by_dict(self.table_name, insert_dict)
+        self.db_instance.insert_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: int):
-        command = '''
+        command = f'''
             SELECT *
-            FROM {table_name}
-            WHERE food_id = {id}
-        '''.format(table_name=self.table_name, id=for_key)
+            FROM {self.TABLE_NAME}
+            WHERE food_id = {for_key}
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -43,25 +47,25 @@ class TableFoodList(DBTableProtocol):
         return self.fetch_record(food_id)
 
     def find_food_record_by_name(self, name: str):
-        command = '''
+        command = f'''
             SELECT *
-            FROM {table_name}
+            FROM {self.TABLE_NAME}
              WHERE food_name LIKE \'%{name}%\'
-        '''.format(table_name=self.table_name, name=name)
+        '''
         return self.db_instance.fetch_table_by_command(command)
 
     def get_food_list(self):
-        command = '''
+        command = f'''
             SELECT *
-            FROM {table_name}
-        '''.format(table_name=self.table_name)
+            FROM {self.TABLE_NAME}
+        '''
         return self.db_instance.fetch_table_by_command(command)
 
     def get_food_product_list(self):
-        command = '''
+        command = f'''
             SELECT CONCAT_WS('-', food_brand, food_name) AS product_name
-            FROM {table_name}
-        '''.format(table_name=self.table_name)
+            FROM {self.TABLE_NAME}
+        '''
         return self.db_instance.fetch_table_by_command(command)
 
 

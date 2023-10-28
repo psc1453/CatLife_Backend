@@ -7,21 +7,25 @@ class TableWeightRecords(DBTableProtocol):
         super().__init__(db_instance)
 
     @property
-    def table_name(self):
+    def TABLE_NAME(self):
         return 'WeightRecords'
 
+    @property
+    def EDITABLE_COLUMNS(self):
+        return ['record_date', 'weight']
+
     def insert_record(self, insert_dict: dict):
-        assert all((key in ['record_date', 'weight']) for key in list(
+        assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), 'Find unsupported keys, only [record_date, weight] are supported'
 
-        self.db_instance.insert_table_by_dict(self.table_name, insert_dict)
+        self.db_instance.insert_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: str):
-        command = '''
+        command = f'''
             SELECT *
-            FROM {table_name}
-            WHERE record_date = DATE(\'{date}\')
-        '''.format(table_name=self.table_name, date=for_key)
+            FROM {self.TABLE_NAME}
+            WHERE record_date = DATE(\'{for_key}\')
+        '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -43,35 +47,35 @@ class TableWeightRecords(DBTableProtocol):
             self.insert_record({'weight': weight})
         else:
             self.insert_record(
-                {'record_date': 'DATE(\'{date}\')'.format(date=date), 'weight': weight})
+                {'record_date': f'DATE(\'{date}\')', 'weight': weight})
 
     def get_weight_record_by_date(self, date: str):
         return self.fetch_record(date)
 
     def get_weight_records_by_interval(self, interval_start: str = None, interval_end: str = None):
         if (interval_start, interval_end) == (None, None):
-            command = '''
-                SELECT * FROM {table_name}
-            '''.format(table_name=self.table_name)
+            command = f'''
+                SELECT * FROM {self.TABLE_NAME}
+            '''
         elif interval_start is not None and interval_end is None:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE record_date >= DATE('{date_start}')
-            '''.format(table_name=self.table_name, date_start=interval_start)
+                FROM {self.TABLE_NAME}
+                WHERE record_date >= DATE('{interval_start}')
+            '''
         elif interval_start is None and interval_end is not None:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE record_date <= DATE('{date_end}')
-            '''.format(table_name=self.table_name, date_end=interval_end)
+                FROM {self.TABLE_NAME}
+                WHERE record_date <= DATE('{interval_end}')
+            '''
         else:
-            command = '''
+            command = f'''
                 SELECT * 
-                FROM {table_name}
-                WHERE record_date >= DATE('{date_start}')
-                 AND record_date <= DATE('{date_end}')
-            '''.format(table_name=self.table_name, date_start=interval_start, date_end=interval_end)
+                FROM {self.TABLE_NAME}
+                WHERE record_date >= DATE('{interval_start}')
+                 AND record_date <= DATE('{interval_end}')
+            '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
