@@ -73,3 +73,19 @@ class TableWeight(DBTableProtocol):
         print(command)
         table = self.db_instance.fetch_table_by_command(command)
         return table
+
+
+def test():
+    db = DB.from_yaml('../../../db_info.yml')
+    table_weight = TableWeight(db)
+
+    table_weight.add_weight_record(3.7, '2036-01-01')
+
+    result = table_weight.fetch_record('2023-10-20')
+    print(result)
+    result = table_weight.get_weight_records(interval_start='2023-10-20')
+    print(result)
+
+
+if __name__ == '__main__':
+    test()
