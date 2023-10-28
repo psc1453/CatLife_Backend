@@ -26,7 +26,7 @@ class DB:
                    password=db_info['password'])
 
     def fetch_table_by_command(self, command: str):
-        assert command.upper().startswith(
+        assert command.strip().upper().startswith(
             'SELECT'), 'Not a command for fetching data which begins with SELECT statement.'
         db_connection = pymysql.connect(host=self.db_host, port=self.db_port, database=self.db_name, user=self.db_user,
                                         password=self.db_password)

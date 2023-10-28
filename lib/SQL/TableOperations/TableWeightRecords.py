@@ -21,7 +21,7 @@ class TableWeightRecords(DBTableProtocol):
             SELECT *
             FROM {table_name}
             WHERE record_date = DATE(\'{date}\')
-        '''.format(table_name=self.table_name, date=for_key).strip()
+        '''.format(table_name=self.table_name, date=for_key)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -52,26 +52,26 @@ class TableWeightRecords(DBTableProtocol):
         if (interval_start, interval_end) == (None, None):
             command = '''
                 SELECT * FROM {table_name}
-            '''.format(table_name=self.table_name).strip()
+            '''.format(table_name=self.table_name)
         elif interval_start is not None and interval_end is None:
             command = '''
                 SELECT * 
                 FROM {table_name}
                 WHERE record_date >= DATE('{date_start}')
-            '''.format(table_name=self.table_name, date_start=interval_start).strip()
+            '''.format(table_name=self.table_name, date_start=interval_start)
         elif interval_start is None and interval_end is not None:
             command = '''
                 SELECT * 
                 FROM {table_name}
                 WHERE record_date <= DATE('{date_end}')
-            '''.format(table_name=self.table_name, date_end=interval_end).strip()
+            '''.format(table_name=self.table_name, date_end=interval_end)
         else:
             command = '''
                 SELECT * 
                 FROM {table_name}
                 WHERE record_date >= DATE('{date_start}')
                  AND record_date <= DATE('{date_end}')
-            '''.format(table_name=self.table_name, date_start=interval_start, date_end=interval_end).strip()
+            '''.format(table_name=self.table_name, date_start=interval_start, date_end=interval_end)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
