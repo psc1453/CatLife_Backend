@@ -7,22 +7,26 @@ class TableDietRecords(DBTableProtocol):
         super().__init__(db_instance)
 
     @property
-    def table_name(self):
+    def TABLE_NAME(self):
         return 'DietRecords'
 
+    @property
+    def EDITABLE_COLUMNS(self):
+        return ['food_id', 'food_quantity', 'diet_timestamp']
+
     def insert_record(self, insert_dict: dict):
-        assert all((key in ['food_id', 'food_quantity', 'diet_timestamp']) for key in list(
+        assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), \
             'Find unsupported keys, only [food_id, food_quantity, diet_timestamp] are supported'
 
-        self.db_instance.insert_table_by_dict(self.table_name, insert_dict)
+        self.db_instance.insert_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: int):
         command = '''
             SELECT *
             FROM {table_name}
             WHERE food_id = {id}
-        '''.format(table_name=self.table_name, id=for_key)
+        '''.format(table_name=self.TABLE_NAME, id=for_key)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -37,8 +41,8 @@ class TableDietRecords(DBTableProtocol):
         """
 
         :param food_id:
-        :param food_quantity:
-        :param diet_timestamp: Only support format like '2023-10-27 10:34:07'
+        :param uantity:
+        :param timestamp: Only support format like '2023-10-27 10:34:07'
         :return:
         """
         insert_dict = {'food_id': food_id, 'food_quantity': quantity}
@@ -51,7 +55,7 @@ class TableDietRecords(DBTableProtocol):
                     SELECT *
                     FROM {table_name}
                     WHERE diet_timestamp = TIMESTAMP(\'{timestamp}\')
-                '''.format(table_name=self.table_name, timestamp=timestamp)
+                '''.format(table_name=self.TABLE_NAME, timestamp=timestamp)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -60,7 +64,7 @@ class TableDietRecords(DBTableProtocol):
             SELECT * 
             FROM {table_name}
             WHERE DATE(diet_timestamp) = DATE('{date}')
-        '''.format(table_name=self.table_name, date=date)
+        '''.format(table_name=self.TABLE_NAME, date=date)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
@@ -68,26 +72,26 @@ class TableDietRecords(DBTableProtocol):
         if (interval_start, interval_end) == (None, None):
             command = '''
                 SELECT * FROM {table_name}
-            '''.format(table_name=self.table_name)
+            '''.format(table_name=self.TABLE_NAME)
         elif interval_start is not None and interval_end is None:
             command = '''
                 SELECT * 
                 FROM {table_name}
                 WHERE diet_timestamp >= TIMESTAMP('{timestamp_start}')
-            '''.format(table_name=self.table_name, timestamp_start=interval_start)
+            '''.format(table_name=self.TABLE_NAME, timestamp_start=interval_start)
         elif interval_start is None and interval_end is not None:
             command = '''
                 SELECT * 
                 FROM {table_name}
                 WHERE diet_timestamp <= TIMESTAMP('{timestamp_end}')
-            '''.format(table_name=self.table_name, timestamp_end=interval_end)
+            '''.format(table_name=self.TABLE_NAME, timestamp_end=interval_end)
         else:
             command = '''
                 SELECT * 
                 FROM {table_name}
                 WHERE diet_timestamp >= TIMESTAMP('{timestamp_start}')
                  AND diet_timestamp <= TIMESTAMP('{timestamp_end}')
-            '''.format(table_name=self.table_name, timestamp_start=interval_start, timestamp_end=interval_end)
+            '''.format(table_name=self.TABLE_NAME, timestamp_start=interval_start, timestamp_end=interval_end)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
