@@ -22,7 +22,6 @@ class TableWeight(DBTableProtocol):
             FROM {table_name}
             WHERE record_date = DATE(\'{date}\')
         '''.format(table_name=self.table_name, date=for_key).strip()
-        print(command)
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
