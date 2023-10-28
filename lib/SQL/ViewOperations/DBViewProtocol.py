@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Union
 
-from ..DB import DB
+from lib.SQL.DB import DB
 
 
-class DBTableProtocol(ABC):
+class DBViewProtocol(ABC):
     def __init__(self, db_instance: DB):
         self.db_instance = db_instance
 
@@ -19,5 +18,5 @@ class DBTableProtocol(ABC):
         pass
 
     @abstractmethod
-    def fetch_record(self, for_key: Union[str, int]):
+    def fetch_record(self, for_key: str):
         pass
