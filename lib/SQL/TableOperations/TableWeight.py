@@ -46,7 +46,10 @@ class TableWeight(DBTableProtocol):
             self.insert_record(
                 {'record_date': 'DATE(\'{date}\')'.format(date=date), 'weight': '{weight}'.format(weight=weight)})
 
-    def get_weight_records(self, interval_start: str = None, interval_end: str = None):
+    def get_weight_record_by_date(self, date: str):
+        return self.fetch_record(date)
+
+    def get_weight_records_by_interval(self, interval_start: str = None, interval_end: str = None):
         if (interval_start, interval_end) == (None, None):
             command = '''
                 SELECT * FROM {table_name}
@@ -83,7 +86,7 @@ def test():
 
     result = table_weight.fetch_record('2023-10-20')
     print(result)
-    result = table_weight.get_weight_records(interval_start='2023-10-20')
+    result = table_weight.get_weight_records_by_interval(interval_start='2023-10-20')
     print(result)
 
 
