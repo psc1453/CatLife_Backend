@@ -40,10 +40,10 @@ class TableWeightRecords(DBTableProtocol):
         :return:
         """
         if date is None:
-            self.insert_record({'weight': '{weight}'.format(weight=weight)})
+            self.insert_record({'weight': weight})
         else:
             self.insert_record(
-                {'record_date': 'DATE(\'{date}\')'.format(date=date), 'weight': '{weight}'.format(weight=weight)})
+                {'record_date': 'DATE(\'{date}\')'.format(date=date), 'weight': weight})
 
     def get_weight_record_by_date(self, date: str):
         return self.fetch_record(date)
@@ -80,7 +80,7 @@ def test():
     db = DB.from_yaml('../../../db_info.yml')
     table_weight = TableWeightRecords(db)
 
-    table_weight.add_weight_record(3.7, '2036-01-01')
+    table_weight.add_weight_record(3.7, '2036-01-02')
 
     result = table_weight.fetch_record('2023-10-20')
     print(result)
