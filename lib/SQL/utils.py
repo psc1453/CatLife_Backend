@@ -17,12 +17,24 @@ def get_table_from_cursor(cursor: cursors.Cursor):
     return table
 
 
+def parse_sql_value_type(value):
+    if type(value) == int or type(value) == float:
+        return str(value)
+    elif type(value) == str:
+        if any([value.strip().upper().startswith(pattern) for pattern in ['DATE', 'TIME', 'TIMESTAMP']]):
+            return value
+        else:
+            return '\'{content}\''.format(content=value)
+    else:
+        raise 'Unsupported value type!'
+
+
 def generate_insert_sql_from_dict(table_name: str, insert_dict: dict):
     from functools import reduce
     sql_key_value_pair = reduce(
-        lambda old_pair, new_pair: (', '.join((old_pair[0], new_pair[0])), ', '.join((old_pair[1], str(new_pair[1])))),
-        insert_dict.items())
+        lambda old_pair, new_pair: (', '.join((old_pair[0], new_pair[0])),
+                                    ', '.join((old_pair[1], parse_sql_value_type(new_pair[1])))), insert_dict.items(), ('', ''))
     sql_insert_string = 'INSERT INTO {name} ({keys}) VALUES ({values})'.format(name=table_name,
-                                                                               keys=sql_key_value_pair[0],
-                                                                               values=sql_key_value_pair[1])
+                                                                               keys=sql_key_value_pair[0][2:],
+                                                                               values=sql_key_value_pair[1][2:])
     return sql_insert_string
