@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Union
 
-from ..DB import DB
+from lib.SQL.DB import DB
 
 
 class DBTableProtocol(ABC):
