@@ -31,8 +31,8 @@ class TableStoolRecords(DBTableProtocol):
         command = '''
             SELECT *
             FROM {table_name}
-            WHERE stool_timestamp = TIMESTAMP(\'{timestamp}\')
-        '''.format(table_name=self.table_name, timestamp=for_key).strip()
+            WHERE stool_id = {id}
+        '''.format(table_name=self.table_name, id=for_key).strip()
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
