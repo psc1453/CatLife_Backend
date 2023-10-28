@@ -41,7 +41,7 @@ class TableDietRecords(DBTableProtocol):
         """
 
         :param food_id:
-        :param uantity:
+        :param quantity:
         :param timestamp: Only support format like '2023-10-27 10:34:07'
         :return:
         """
