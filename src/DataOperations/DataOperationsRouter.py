@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.DataOperations.Summary import DietSummary
+from src.DataOperations.Summary import DietSummary, ExcreteSummary
 from src.DataOperations.Tables import WeightRecords, FoodRecords, DietRecords, UrineRecords, StoolRecords
 
 table_router = APIRouter(
@@ -20,3 +20,4 @@ summary_router = APIRouter(
 )
 
 summary_router.include_router(DietSummary.diet_summary_router)
+summary_router.include_router(ExcreteSummary.excrete_summary_router)

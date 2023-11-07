@@ -11,7 +11,7 @@ view_diet = ViewDietEveryday(db)
 
 diet_summary_router = APIRouter(
     prefix='/diet',
-    tags=['Diet Record']
+    tags=['Diet Summary']
 )
 
 
