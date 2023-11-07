@@ -73,7 +73,16 @@ class TableUrineRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
-    def get_urine_records_by_timestamp(self, timestamp: str):
+    def get_urine_record_by_id(self, urine_id: int):
+        command = f'''
+                    SELECT *
+                    FROM {self.TABLE_NAME}
+                    WHERE urine_id = {urine_id}
+        '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
+    def get_urine_record_by_timestamp(self, timestamp: str):
         command = f'''
                     SELECT *
                     FROM {self.TABLE_NAME}
@@ -126,7 +135,7 @@ def test():
     table_urine.add_urine_record(status=UrineStatus.abnormal)
     table_urine.add_urine_record(timestamp='2026-01-01 14:00:00', comment='hello Bentley')
 
-    record = table_urine.get_urine_records_by_timestamp('2026-01-01 14:00:00')
+    record = table_urine.get_urine_record_by_timestamp('2026-01-01 14:00:00')
     print(record)
     record = table_urine.get_urine_records_by_date('2023-10-22')
     print(record)

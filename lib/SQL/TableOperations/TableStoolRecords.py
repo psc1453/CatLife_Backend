@@ -75,7 +75,16 @@ class TableStoolRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
-    def get_stool_records_by_timestamp(self, timestamp: str):
+    def get_stool_record_by_id(self, stool_id: int):
+        command = f'''
+                    SELECT *
+                    FROM {self.TABLE_NAME}
+                    WHERE stool_id = {stool_id}
+        '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
+    def get_stool_record_by_timestamp(self, timestamp: str):
         command = f'''
             SELECT *
             FROM {self.TABLE_NAME}
@@ -128,7 +137,7 @@ def test():
     table_stool.add_stool_record(status=StoolStatus.hard)
     table_stool.add_stool_record(timestamp='2026-01-01 14:00:00', comment='hello Bentley')
 
-    record = table_stool.get_stool_records_by_timestamp('2026-01-01 14:00:00')
+    record = table_stool.get_stool_record_by_timestamp('2026-01-01 14:00:00')
     print(record)
     record = table_stool.get_stool_records_by_date('2023-10-22')
     print(record)

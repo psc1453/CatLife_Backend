@@ -62,8 +62,14 @@ async def get_full_stool_table():
     return table_to_dict(table)
 
 
-@stool_router.get('/get_stool_record_by_date/{date}')
-async def get_stool_record_by_date(date: str):
+@stool_router.get('/get_stool_record_by_id/{stool_id}')
+async def get_stool_record_by_id(stool_id: int):
+    table = table_stool.get_stool_record_by_id(stool_id=stool_id)
+    return table_to_dict(table)
+
+
+@stool_router.get('/get_stool_records_by_date/{date}')
+async def get_stool_records_by_date(date: str):
     table = table_stool.get_stool_records_by_date(date=date)
     return table_to_dict(table)
 

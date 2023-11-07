@@ -62,8 +62,14 @@ async def get_full_urine_table():
     return table_to_dict(table)
 
 
-@urine_router.get('/get_urine_record_by_date/{date}')
-async def get_urine_record_by_date(date: str):
+@urine_router.get('/get_urine_record_by_id/{urine_id}')
+async def get_urine_record_by_id(urine_id: int):
+    table = table_urine.get_urine_record_by_id(urine_id=urine_id)
+    return table_to_dict(table)
+
+
+@urine_router.get('/get_urine_records_by_date/{date}')
+async def get_urine_records_by_date(date: str):
     table = table_urine.get_urine_records_by_date(date=date)
     return table_to_dict(table)
 

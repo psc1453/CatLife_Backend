@@ -62,8 +62,14 @@ async def get_full_diet_table():
     return table_to_dict(table)
 
 
-@diet_router.get('/get_diet_record_by_date/{date}')
-async def get_diet_record_by_date(date: str):
+@diet_router.get('/get_diet_record_by_id/{diet_id}')
+async def get_diet_record_by_id(diet_id: int):
+    table = table_diet.get_diet_record_by_id(diet_id=diet_id)
+    return table_to_dict(table)
+
+
+@diet_router.get('/get_diet_records_by_date/{date}')
+async def get_diet_records_by_date(date: str):
     table = table_diet.get_diet_records_by_date(date=date)
     return table_to_dict(table)
 

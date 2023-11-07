@@ -58,7 +58,16 @@ class TableDietRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
-    def get_diet_records_by_timestamp(self, timestamp: str):
+    def get_diet_record_by_id(self, diet_id: int):
+        command = f'''
+                    SELECT *
+                    FROM {self.TABLE_NAME}
+                    WHERE diet_id = {diet_id}
+        '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
+    def get_diet_record_by_timestamp(self, timestamp: str):
         command = f'''
             SELECT *
             FROM {self.TABLE_NAME}
@@ -110,7 +119,7 @@ def test():
 
     table_diet.add_diet_record(food_id=12, quantity=100, timestamp='2023-11-11 00:00:00')
 
-    record = table_diet.get_diet_records_by_timestamp('2026-01-01 14:00:00')
+    record = table_diet.get_diet_record_by_timestamp('2026-01-01 14:00:00')
     print(record)
     record = table_diet.get_diet_records_by_date('2023-10-22')
     print(record)
