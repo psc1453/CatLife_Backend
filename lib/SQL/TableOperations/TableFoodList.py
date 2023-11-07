@@ -51,28 +51,21 @@ class TableFoodList(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
+    def get_food_products_all(self):
+        command = f'''
+            SELECT CONCAT_WS('-', food_brand, food_name) AS product_name
+            FROM {self.TABLE_NAME}
+        '''
+        return self.db_instance.fetch_table_by_command(command)
+
     def get_food_record_by_id(self, food_id: int):
         return self.fetch_record(food_id)
 
-    def find_food_record_by_name(self, name: str):
+    def find_food_records_by_name(self, name: str):
         command = f'''
             SELECT *
             FROM {self.TABLE_NAME}
              WHERE food_name LIKE \'%{name}%\'
-        '''
-        return self.db_instance.fetch_table_by_command(command)
-
-    def get_food_list(self):
-        command = f'''
-            SELECT *
-            FROM {self.TABLE_NAME}
-        '''
-        return self.db_instance.fetch_table_by_command(command)
-
-    def get_food_product_list(self):
-        command = f'''
-            SELECT CONCAT_WS('-', food_brand, food_name) AS product_name
-            FROM {self.TABLE_NAME}
         '''
         return self.db_instance.fetch_table_by_command(command)
 
@@ -87,7 +80,7 @@ def test():
     print(result)
     search = table_food.find_food_record_by_name('猫条')
     print(search)
-    all = table_food.get_food_list()
+    all = table_food.get_food_records_all()
     print(all)
     products = table_food.get_food_product_list()
     print(products)
