@@ -50,6 +50,14 @@ class TableDietRecords(DBTableProtocol):
             insert_dict.update({'diet_timestamp': timestamp})
         self.insert_record(insert_dict)
 
+    def get_diet_records_all(self):
+        command = f'''
+            SELECT * 
+            FROM {self.TABLE_NAME}
+        '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
     def get_diet_records_by_timestamp(self, timestamp: str):
         command = f'''
             SELECT *

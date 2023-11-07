@@ -43,6 +43,14 @@ class TableFoodList(DBTableProtocol):
                             'food_category': category,
                             'food_unit': unit})
 
+    def get_food_records_all(self):
+        command = f'''
+            SELECT * 
+            FROM {self.TABLE_NAME}
+        '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
     def get_food_record_by_id(self, food_id: int):
         return self.fetch_record(food_id)
 

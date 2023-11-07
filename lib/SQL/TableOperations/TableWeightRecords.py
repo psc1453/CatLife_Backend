@@ -49,6 +49,14 @@ class TableWeightRecords(DBTableProtocol):
             self.insert_record(
                 {'record_date': f'DATE(\'{date}\')', 'weight': weight})
 
+    def get_weight_records_all(self):
+        command = f'''
+            SELECT * 
+            FROM {self.TABLE_NAME}
+        '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
     def get_weight_record_by_date(self, date: str):
         return self.fetch_record(date)
 
