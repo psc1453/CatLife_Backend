@@ -38,7 +38,7 @@ weight_router = APIRouter(
 )
 
 
-@weight_router.post('/add_record')
+@weight_router.post('/add_weight_record')
 async def add_weight_record(record: WeightRecordModel):
     record_dict = record.dict()
     try:
@@ -52,19 +52,19 @@ async def add_weight_record(record: WeightRecordModel):
         return status_dict
 
 
-@weight_router.get('/get_full_table')
+@weight_router.get('/get_full_weight_table')
 async def get_full_weight_table():
     table = table_weight.get_weight_records_all()
     return table_to_dict(table)
 
 
-@weight_router.get('/get_record_by_date/{date}')
+@weight_router.get('/get_weight_record_by_date/{date}')
 async def get_weight_record_by_date(date: str):
     table = table_weight.get_weight_record_by_date(date=date)
     return table_to_dict(table)
 
 
-@weight_router.get('/get_records_by_interval/{date_start}/{date_end}')
+@weight_router.get('/get_weight_records_by_interval/{date_start}/{date_end}')
 async def get_weight_records_by_interval(date_start: str, date_end: str):
     table = table_weight.get_weight_records_by_interval(date_start, date_end)
     return table_to_dict(table)

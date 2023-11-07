@@ -39,7 +39,7 @@ stool_router = APIRouter(
 )
 
 
-@stool_router.post('/add_record')
+@stool_router.post('/add_stool_record')
 async def add_stool_record(record: StoolRecordModel):
     record_dict = record.dict()
     try:
@@ -53,19 +53,19 @@ async def add_stool_record(record: StoolRecordModel):
         return status_dict
 
 
-@stool_router.get('/get_full_table')
+@stool_router.get('/get_full_stool_table')
 async def get_full_stool_table():
     table = table_stool.get_stool_records_all()
     return table_to_dict(table)
 
 
-@stool_router.get('/get_records_by_date/{date}')
+@stool_router.get('/get_stool_record_by_date/{date}')
 async def get_stool_record_by_date(date: str):
     table = table_stool.get_stool_records_by_date(date=date)
     return table_to_dict(table)
 
 
-@stool_router.get('/get_records_by_interval/{date_start}/{date_end}')
+@stool_router.get('/get_stool_records_by_interval/{date_start}/{date_end}')
 async def get_stool_records_by_interval(date_start: str, date_end: str):
     table = table_stool.get_stool_records_by_interval(date_start, date_end)
     return table_to_dict(table)
