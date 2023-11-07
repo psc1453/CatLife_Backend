@@ -78,11 +78,11 @@ def test():
 
     result = table_food.get_food_record_by_id(15)
     print(result)
-    search = table_food.find_food_record_by_name('猫条')
+    search = table_food.find_food_records_by_name('猫条')
     print(search)
     all = table_food.get_food_records_all()
     print(all)
-    products = table_food.get_food_product_list()
+    products = table_food.get_food_products_all()
     print(products)
 
 
