@@ -11,7 +11,7 @@ class StoolRecordModel(BaseModel):
     stool_comment: str = None
 
     @validator('stool_timestamp')
-    def is_valid_date(cls, input_date):
+    def is_valid_timestamp(cls, input_date):
         try:
             datetime.strptime(input_date, '%Y-%m-%d %H:%M:%S')
         except ValueError:
@@ -19,7 +19,7 @@ class StoolRecordModel(BaseModel):
         return input_date
 
     @validator('stool_status')
-    def is_valid_weight(cls, input_status):
+    def is_valid_status(cls, input_status):
         if input_status in [s.name for s in StoolStatus]:
             return input_status
         else:

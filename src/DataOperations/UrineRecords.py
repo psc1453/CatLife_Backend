@@ -11,7 +11,7 @@ class UrineRecordModel(BaseModel):
     urine_comment: str = None
 
     @validator('urine_timestamp')
-    def is_valid_date(cls, input_date):
+    def is_valid_timestamp(cls, input_date):
         try:
             datetime.strptime(input_date, '%Y-%m-%d %H:%M:%S')
         except ValueError:
@@ -19,7 +19,7 @@ class UrineRecordModel(BaseModel):
         return input_date
 
     @validator('urine_status')
-    def is_valid_weight(cls, input_status):
+    def is_valid_status(cls, input_status):
         if input_status in [s.name for s in UrineStatus]:
             return input_status
         else:
