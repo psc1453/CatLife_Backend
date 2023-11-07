@@ -23,6 +23,14 @@ class ViewDietEveryday(DBViewProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
+    def get_diet_records_all(self):
+        command = f'''
+            SELECT * 
+            FROM {self.VIEW_NAME}
+        '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
     def get_diet_records_by_date(self, date: str):
         command = f'''
             SELECT * 
