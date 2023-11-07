@@ -15,11 +15,14 @@ class WeightRecordModel(BaseModel):
 
     @validator('record_date')
     def is_valid_date(cls, input_date):
-        try:
-            datetime.strptime(input_date, '%Y-%m-%d')
-        except ValueError:
-            raise ValueError("Invalid date string, only support format like \"2023-10-27\"!")
-        return input_date
+        if input_date is not None:
+            try:
+                datetime.strptime(input_date, '%Y-%m-%d')
+            except ValueError:
+                raise ValueError("Invalid date string, only support format like \"2023-10-27\"!")
+            return input_date
+        else:
+            return input_date
 
     @validator('weight')
     def is_valid_weight(cls, input_weight):

@@ -15,12 +15,15 @@ class UrineRecordModel(BaseModel):
     urine_comment: str = None
 
     @validator('urine_timestamp')
-    def is_valid_timestamp(cls, input_date):
-        try:
-            datetime.strptime(input_date, '%Y-%m-%d %H:%M:%S')
-        except ValueError:
-            raise ValueError("Invalid date string, only support format like \"2023-10-27 00:10:00\"!")
-        return input_date
+    def is_valid_timestamp(cls, input_timestamp):
+        if input_timestamp is not None:
+            try:
+                datetime.strptime(input_timestamp, '%Y-%m-%d %H:%M:%S')
+            except ValueError:
+                raise ValueError("Invalid date string, only support format like \"2023-10-27 00:10:00\"!")
+            return input_timestamp
+        else:
+            return input_timestamp
 
     @validator('urine_status')
     def is_valid_status(cls, input_status):
