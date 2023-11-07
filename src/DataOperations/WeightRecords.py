@@ -48,8 +48,8 @@ async def add_record(record: WeightRecordModel):
         message = {"message": str(error)}
         return message
     else:
-        record_dict.update({"message": "ok"})
-        return record_dict
+        status_dict = {"inserted": record_dict, "message": "ok"}
+        return status_dict
 
 
 @weight_router.get('/get_full_table')
