@@ -40,7 +40,7 @@ urine_router = APIRouter(
 
 
 @urine_router.post('/add_record')
-async def add_record(record: UrineRecordModel):
+async def add_urine_record(record: UrineRecordModel):
     record_dict = record.dict()
     try:
         table_urine.insert_record(record_dict)
@@ -54,7 +54,7 @@ async def add_record(record: UrineRecordModel):
 
 
 @urine_router.get('/get_full_table')
-async def get_full_table():
+async def get_full_urine_table():
     table = table_urine.get_urine_records_all()
     return table_to_dict(table)
 
@@ -66,6 +66,6 @@ async def get_urine_record_by_date(date: str):
 
 
 @urine_router.get('/get_records_by_interval/{date_start}/{date_end}')
-async def get_records_by_interval(date_start: str, date_end: str):
+async def get_urine_records_by_interval(date_start: str, date_end: str):
     table = table_urine.get_urine_records_by_interval(date_start, date_end)
     return table_to_dict(table)
