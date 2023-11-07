@@ -25,7 +25,7 @@ class TableDietRecords(DBTableProtocol):
         command = f'''
             SELECT *
             FROM {self.TABLE_NAME}
-            WHERE food_id = {for_key}
+            WHERE diet_id = {for_key}
         '''
         table = self.db_instance.fetch_table_by_command(command)
         return table
@@ -59,13 +59,7 @@ class TableDietRecords(DBTableProtocol):
         return table
 
     def get_diet_record_by_id(self, diet_id: int):
-        command = f'''
-                    SELECT *
-                    FROM {self.TABLE_NAME}
-                    WHERE diet_id = {diet_id}
-        '''
-        table = self.db_instance.fetch_table_by_command(command)
-        return table
+        return self.fetch_record(diet_id)
 
     def get_diet_record_by_timestamp(self, timestamp: str):
         command = f'''

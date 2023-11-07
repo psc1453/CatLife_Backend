@@ -74,13 +74,7 @@ class TableUrineRecords(DBTableProtocol):
         return table
 
     def get_urine_record_by_id(self, urine_id: int):
-        command = f'''
-                    SELECT *
-                    FROM {self.TABLE_NAME}
-                    WHERE urine_id = {urine_id}
-        '''
-        table = self.db_instance.fetch_table_by_command(command)
-        return table
+        return self.fetch_record(urine_id)
 
     def get_urine_record_by_timestamp(self, timestamp: str):
         command = f'''

@@ -76,13 +76,7 @@ class TableStoolRecords(DBTableProtocol):
         return table
 
     def get_stool_record_by_id(self, stool_id: int):
-        command = f'''
-                    SELECT *
-                    FROM {self.TABLE_NAME}
-                    WHERE stool_id = {stool_id}
-        '''
-        table = self.db_instance.fetch_table_by_command(command)
-        return table
+        return self.fetch_record(stool_id)
 
     def get_stool_record_by_timestamp(self, timestamp: str):
         command = f'''
