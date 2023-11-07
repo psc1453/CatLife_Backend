@@ -1,11 +1,213 @@
 # Test your FastAPI endpoints
 
+###### Test main
+
 GET http://127.0.0.1:8000/
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
+POST http://127.0.0.1:8000/hello/User
+Accept: application/json
+
+###### Test weight
+
+###
+
+GET http://127.0.0.1:8000/tables/weight/get_full_weight_table
 Accept: application/json
 
 ###
+
+GET http://127.0.0.1:8000/tables/weight/get_weight_record_by_date/2020-01-01
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/weight/get_weight_records_by_interval/2020-01-01/2023-10-15
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/tables/weight/add_weight_record
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "record_date": "2020-01-02",
+  "weight": 3.666
+}
+
+
+###### Test urine
+
+###
+
+GET http://127.0.0.1:8000/tables/urine/get_full_urine_table
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/urine/get_urine_record_by_id/48
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/urine/get_urine_records_by_date/2023-10-28
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/urine/get_urine_records_by_interval/2023-10-15/2023-10-16
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/tables/urine/add_urine_record
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "urine_timestamp": "2020-01-02 00:00:00",
+  "urine_status": "abnormal",
+  "urine_comment": "very good"
+}
+
+###### Test stool
+
+###
+
+GET http://127.0.0.1:8000/tables/stool/get_full_stool_table
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/stool/get_stool_record_by_id/42
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/stool/get_stool_records_by_date/2023-10-28
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/stool/get_stool_records_by_interval/2023-10-16/2023-10-18
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/tables/stool/add_stool_record
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "stool_timestamp": "2020-01-02 00:00:00",
+  "stool_status": "normal",
+  "stool_comment": "very good"
+}
+
+###### Test food
+
+###
+
+GET http://127.0.0.1:8000/tables/food/get_full_food_table
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/food/get_full_food_products_table
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/food/get_food_record_by_id/3
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/food/fine_food_records_by_name/猫条
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/tables/food/add_food_record
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "food_brand": "",
+  "food_name": "pots",
+  "food_category": "drinks",
+  "food_unit": "瓶"
+}
+
+###### Test diet
+
+###
+
+GET http://127.0.0.1:8000/tables/diet/get_full_diet_table
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/diet/get_diet_record_by_id/68
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/diet/get_diet_records_by_date/2023-11-11
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/tables/diet/get_diet_records_by_interval/2023-10-24/2023-10-25
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/tables/diet/add_diet_record
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "food_id": 1,
+  "food_quantity": 10,
+  "diet_timestamp": "2023-11-08 00:09:59"
+}
+
+
+###### Test diet summary
+
+###
+
+GET http://127.0.0.1:8000/summaries/diet/get_full_diet_summary
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/summaries/diet/get_diet_summary_by_date/2023-11-11
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/summaries/diet/get_diet_summary_by_interval/2023-10-15/2023-10-16
+Accept: application/json
+
+
+###### Test excrete summary
+
+###
+
+GET http://127.0.0.1:8000/summaries/excrete/get_full_excrete_summary
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/summaries/excrete/get_excrete_summary_by_date/2023-10-15
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8000/summaries/excrete/get_excrete_summary_by_interval/2023-10-15/2023-10-17
+Accept: application/json
