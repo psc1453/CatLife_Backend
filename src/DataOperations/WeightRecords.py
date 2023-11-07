@@ -52,7 +52,7 @@ async def add_record(record: WeightRecordModel):
         return record_dict
 
 
-@weight_router.get('/get_full_table/')
+@weight_router.get('/get_full_table')
 async def get_full_table():
     table = table_weight.get_weight_records_all()
     return table_to_dict(table)
