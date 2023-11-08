@@ -71,3 +71,16 @@ async def get_weight_record_by_date(date: str):
 async def get_weight_records_by_interval(date_start: str, date_end: str):
     table = table_weight.get_weight_records_by_interval(date_start, date_end)
     return table_to_dict(table)
+
+
+@weight_router.delete('/delete_weight_record_by_date/{date}')
+async def delete_weight_record_by_date(date: str):
+    try:
+        table_weight.delete_weight_record_by_date(date)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"deleted": date, "message": "ok"}
+        return status_dict

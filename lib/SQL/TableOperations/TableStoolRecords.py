@@ -129,6 +129,9 @@ class TableStoolRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
+    def delete_stool_record_by_id(self, stool_id: int):
+        self.delete_record(stool_id)
+
 
 def test():
     db = DB.from_yaml('../../../db_info.yml')

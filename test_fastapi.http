@@ -38,6 +38,11 @@ Accept: application/json
   "weight": 3.666
 }
 
+###
+
+DELETE http://127.0.0.1:8000/tables/weight/delete_weight_record_by_date/2020-01-02
+Accept: application/json
+
 
 ###### Test urine
 
@@ -73,6 +78,11 @@ Accept: application/json
   "urine_comment": "very good"
 }
 
+###
+
+DELETE http://127.0.0.1:8000/tables/urine/delete_urine_record_by_id/55
+Accept: application/json
+
 ###### Test stool
 
 ###
@@ -106,6 +116,11 @@ Accept: application/json
   "stool_status": "normal",
   "stool_comment": "very good"
 }
+
+###
+
+DELETE http://127.0.0.1:8000/tables/stool/delete_stool_record_by_id/43
+Accept: application/json
 
 ###### Test food
 
@@ -142,6 +157,11 @@ Accept: application/json
   "food_unit": "瓶"
 }
 
+###
+
+DELETE http://127.0.0.1:8000/tables/food/delete_food_record_by_id/17
+Accept: application/json
+
 ###### Test diet
 
 ###
@@ -176,6 +196,10 @@ Accept: application/json
   "diet_timestamp": "2023-11-08 00:09:59"
 }
 
+###
+
+DELETE http://127.0.0.1:8000/tables/diet/delete_diet_record_by_id/70
+Accept: application/json
 
 ###### Test diet summary
 

@@ -36,7 +36,7 @@ class DBTableProtocol(ABC):
     def fetch_record(self, for_key: Union[str, int]):
         pass
 
-    def delete_record(self, for_key: str):
+    def delete_record(self, for_key: Union[str, int]):
         self.db_instance.delete_row_from_table_by_key(self.TABLE_NAME, self.PRIMARY_KEY, for_key)
 
     @abstractmethod

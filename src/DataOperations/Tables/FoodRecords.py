@@ -60,3 +60,16 @@ async def get_food_record_by_id(food_id: int):
 async def fine_food_records_by_name(food_name: str):
     table = table_food.find_food_records_by_name(name=food_name)
     return table_to_dict(table)
+
+
+@food_router.delete('/delete_food_record_by_id/{food_id}')
+async def delete_food_record_by_id(food_id: int):
+    try:
+        table_food.delete_food_record_by_id(food_id)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"deleted": food_id, "message": "ok"}
+        return status_dict

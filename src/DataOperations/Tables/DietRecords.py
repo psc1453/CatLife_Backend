@@ -78,3 +78,16 @@ async def get_diet_records_by_date(date: str):
 async def get_diet_records_by_interval(date_start: str, date_end: str):
     table = table_diet.get_diet_records_by_interval(date_start, date_end)
     return table_to_dict(table)
+
+
+@diet_router.delete('/delete_diet_record_by_id/{diet_id}')
+async def delete_diet_record_by_id(diet_id: int):
+    try:
+        table_diet.delete_diet_record_by_id(diet_id)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"deleted": diet_id, "message": "ok"}
+        return status_dict

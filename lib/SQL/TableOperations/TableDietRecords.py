@@ -112,6 +112,9 @@ class TableDietRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
+    def delete_diet_record_by_id(self, diet_id: int):
+        self.delete_record(diet_id)
+
 
 def test():
     db = DB.from_yaml('../../../db_info.yml')

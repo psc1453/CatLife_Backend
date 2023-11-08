@@ -93,6 +93,9 @@ class TableWeightRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
+    def delete_weight_record_by_date(self, date: str):
+        self.delete_record(date)
+
 
 def test():
     db = DB.from_yaml('../../../db_info.yml')

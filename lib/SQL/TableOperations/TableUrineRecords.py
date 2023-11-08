@@ -127,6 +127,9 @@ class TableUrineRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
+    def delete_urine_record_by_id(self, urine_id: int):
+        self.delete_record(urine_id)
+
 
 def test():
     db = DB.from_yaml('../../../db_info.yml')

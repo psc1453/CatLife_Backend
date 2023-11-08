@@ -78,3 +78,16 @@ async def get_stool_records_by_date(date: str):
 async def get_stool_records_by_interval(date_start: str, date_end: str):
     table = table_stool.get_stool_records_by_interval(date_start, date_end)
     return table_to_dict(table)
+
+
+@stool_router.delete('/delete_stool_record_by_id/{stool_id}')
+async def delete_stool_record_by_id(stool_id: int):
+    try:
+        table_stool.delete_stool_record_by_id(stool_id)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"deleted": stool_id, "message": "ok"}
+        return status_dict
