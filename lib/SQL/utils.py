@@ -37,8 +37,17 @@ def generate_insert_sql_from_dict(table_name: str, insert_dict: dict):
     from functools import reduce
     sql_key_value_pair = reduce(
         lambda old_pair, new_pair: (', '.join((old_pair[0], new_pair[0])),
-                                    ', '.join((old_pair[1], parse_sql_value_type(new_pair[1])))), insert_dict.items(), ('', ''))
+                                    ', '.join((old_pair[1], parse_sql_value_type(new_pair[1])))), insert_dict.items(),
+        ('', ''))
     sql_insert_string = 'INSERT INTO {name} ({keys}) VALUES ({values})'.format(name=table_name,
                                                                                keys=sql_key_value_pair[0][2:],
                                                                                values=sql_key_value_pair[1][2:])
     return sql_insert_string
+
+
+def generate_delete_sql_from_key(table_name: str, key_name: str, key_value: str):
+    sql_delete_string = f'''
+        DELETE FROM {table_name}
+        WHERE {key_name} = {parse_sql_value_type(key_value)}
+    '''
+    return sql_delete_string
