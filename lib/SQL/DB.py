@@ -38,7 +38,7 @@ class DB:
         db_connection.close()
         return table
 
-    def insert_table_by_command(self, command: str):
+    def insert_row_to_table_by_command(self, command: str):
         assert command.upper().startswith(
             'INSERT'), 'Not a command for inserting data which begins with INSERT statement.'
         db_connection = pymysql.connect(host=self.db_host, port=self.db_port, database=self.db_name, user=self.db_user,
@@ -55,6 +55,6 @@ class DB:
         db_cursor.close()
         db_connection.close()
 
-    def insert_table_by_dict(self, table_name, insert_dict):
+    def insert_row_to_table_by_dict(self, table_name, insert_dict):
         command = generate_insert_sql_from_dict(table_name, insert_dict)
-        self.insert_table_by_command(command)
+        self.insert_row_to_table_by_command(command)

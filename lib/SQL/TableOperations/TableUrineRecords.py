@@ -27,7 +27,7 @@ class TableUrineRecords(DBTableProtocol):
             insert_dict.keys())), \
             'Find unsupported keys, only [urine_timestamp, urine_status, urine_comment] are supported'
 
-        self.db_instance.insert_table_by_dict(self.TABLE_NAME, insert_dict)
+        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: int):
         command = f'''

@@ -19,7 +19,7 @@ class TableDietRecords(DBTableProtocol):
             insert_dict.keys())), \
             'Find unsupported keys, only [food_id, food_quantity, diet_timestamp] are supported'
 
-        self.db_instance.insert_table_by_dict(self.TABLE_NAME, insert_dict)
+        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: int):
         command = f'''
