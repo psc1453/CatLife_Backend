@@ -36,12 +36,7 @@ class TableDietRecords(DBTableProtocol):
         self.insert_record(insert_dict)
 
     def get_diet_records_all(self):
-        command = f'''
-            SELECT * 
-            FROM {self.TABLE_NAME}
-        '''
-        table = self.db_instance.fetch_table_by_command(command)
-        return table
+        return self.fetch_table()
 
     def get_diet_record_by_id(self, diet_id: int):
         return self.fetch_record(diet_id)

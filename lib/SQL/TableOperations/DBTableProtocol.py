@@ -38,6 +38,14 @@ class DBTableProtocol(ABC):
         table = self.db_instance.fetch_table_by_key(self.TABLE_NAME, self.PRIMARY_KEY, for_key)
         return table
 
+    def fetch_table(self):
+        command = f'''
+                    SELECT * 
+                    FROM {self.TABLE_NAME}
+                '''
+        table = self.db_instance.fetch_table_by_command(command)
+        return table
+
     def delete_record(self, for_key: Union[str, int]):
         self.db_instance.delete_row_from_table_by_key(self.TABLE_NAME, self.PRIMARY_KEY, for_key)
 

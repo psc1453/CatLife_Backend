@@ -53,12 +53,8 @@ class TableStoolRecords(DBTableProtocol):
         self.insert_record(insert_dict)
 
     def get_stool_records_all(self):
-        command = f'''
-            SELECT * 
-            FROM {self.TABLE_NAME}
-        '''
-        table = self.db_instance.fetch_table_by_command(command)
-        return table
+        return self.fetch_table()
+
 
     def get_stool_record_by_id(self, stool_id: int):
         return self.fetch_record(stool_id)
