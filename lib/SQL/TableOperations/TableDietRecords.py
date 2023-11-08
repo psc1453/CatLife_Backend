@@ -29,15 +29,6 @@ class TableDietRecords(DBTableProtocol):
 
         self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
 
-    def fetch_record(self, for_key: int):
-        command = f'''
-            SELECT *
-            FROM {self.TABLE_NAME}
-            WHERE diet_id = {for_key}
-        '''
-        table = self.db_instance.fetch_table_by_command(command)
-        return table
-
     def add_diet_record(self, food_id: int, quantity: float, timestamp: str = None):
         """
 

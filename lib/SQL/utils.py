@@ -60,6 +60,15 @@ def generate_sql_key_value_string_for_update(dict_input: dict):
     return sql_key_value_string[2:]
 
 
+def generate_fetch_sql_from_key(table_name: str, key_name: str, key_value: Union[str, int]):
+    sql_fetch_string = f'''
+        SELECT *
+        FROM {table_name}
+        WHERE {key_name} = {parse_sql_value_type(key_value)}
+    '''
+    return sql_fetch_string
+
+
 def generate_insert_sql_from_dict(table_name: str, insert_dict: dict):
     sql_key_value_pair = generate_sql_key_value_pair_for_insert(insert_dict)
     sql_insert_string = f'''

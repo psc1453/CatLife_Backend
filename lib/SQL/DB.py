@@ -1,7 +1,7 @@
 import pymysql
 
-from .utils import get_table_from_cursor, generate_insert_sql_from_dict, generate_delete_sql_from_key, \
-    generate_update_sql_by_key_with_dict
+from .utils import get_table_from_cursor, generate_fetch_sql_from_key, generate_insert_sql_from_dict, \
+    generate_delete_sql_from_key, generate_update_sql_by_key_with_dict
 
 
 class DB:
@@ -37,6 +37,11 @@ class DB:
 
         db_cursor.close()
         db_connection.close()
+        return table
+
+    def fetch_table_by_key(self, table_name, key_name: str, key_value):
+        command = generate_fetch_sql_from_key(table_name, key_name, key_value)
+        table = self.fetch_table_by_command(command)
         return table
 
     def insert_row_to_table_by_command(self, command: str):

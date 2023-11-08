@@ -29,15 +29,6 @@ class TableFoodList(DBTableProtocol):
 
         self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
 
-    def fetch_record(self, for_key: int):
-        command = f'''
-            SELECT *
-            FROM {self.TABLE_NAME}
-            WHERE food_id = {for_key}
-        '''
-        table = self.db_instance.fetch_table_by_command(command)
-        return table
-
     def add_food_record(self, brand: str, name: str, category: str, unit: str):
         self.insert_record({'food_brand': brand,
                             'food_name': name,

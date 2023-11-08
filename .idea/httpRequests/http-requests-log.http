@@ -1,3 +1,93 @@
+GET http://127.0.0.1:8000/tables/stool/get_full_stool_table
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212717.200.json
+
+###
+
+GET http://127.0.0.1:8000/tables/stool/get_stool_records_by_date/2023-10-28
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212715.200.json
+
+###
+
+GET http://127.0.0.1:8000/tables/stool/get_stool_record_by_id/42
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212714.200.json
+
+###
+
+GET http://127.0.0.1:8000/tables/urine/get_urine_record_by_id/48
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212708.200.json
+
+###
+
+GET http://127.0.0.1:8000/tables/weight/get_full_weight_table
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212531.200.json
+
+###
+
+GET http://127.0.0.1:8000/tables/weight/get_weight_records_by_interval/2020-01-01/2023-10-15
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212529.200.json
+
+###
+
+GET http://127.0.0.1:8000/tables/weight/get_weight_record_by_date/2020-01-01
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212525.200.json
+
+###
+
+GET http://127.0.0.1:8000/tables/weight/get_weight_record_by_date/2020-01-01
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212446.500.txt
+
+###
+
+GET http://127.0.0.1:8000/tables/weight/get_weight_record_by_date/2020-01-01
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-08T212402.500.txt
+
+###
+
 PUT http://127.0.0.1:8000/tables/diet/update_diet_record_by_id_with_dict/73
 Content-Type: application/json;charset=utf-8
 Accept: application/json
@@ -512,96 +602,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-11-08T011144.500.txt
-
-###
-
-GET http://127.0.0.1:8000/summaries/excrete/get_excrete_summary_by_interval/2023-10-15/2023-10-17
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010848.200.json
-
-###
-
-GET http://127.0.0.1:8000/summaries/excrete/get_excrete_summary_by_date/2023-10-15
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010845.200.json
-
-###
-
-GET http://127.0.0.1:8000/summaries/excrete/get_full_excrete_summary
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010840.200.json
-
-###
-
-GET http://127.0.0.1:8000/summaries/excrete/get_full_excrete_summary
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010750.404.json
-
-###
-
-GET http://127.0.0.1:8000/tables/weight/get_weight_records_by_interval/2020-01-01/2023-10-15
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010249.200.json
-
-###
-
-GET http://127.0.0.1:8000/tables/urine/get_full_urine_table
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010243.200.json
-
-###
-
-GET http://127.0.0.1:8000/urine/tables/get_full_urine_table
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010228.404.json
-
-###
-
-GET http://127.0.0.1:8000/tables/urine/get_urine_records_by_date/2023-10-28
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010223.200.json
-
-###
-
-GET http://127.0.0.1:8000/tables/stool/get_stool_record_by_id/42
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-08T010214.200.json
 
 ###
 

@@ -32,9 +32,9 @@ class DBTableProtocol(ABC):
     def insert_record(self, insert_dict: dict):
         pass
 
-    @abstractmethod
     def fetch_record(self, for_key: Union[str, int]):
-        pass
+        table = self.db_instance.fetch_table_by_key(self.TABLE_NAME, self.PRIMARY_KEY, for_key)
+        return table
 
     def delete_record(self, for_key: Union[str, int]):
         self.db_instance.delete_row_from_table_by_key(self.TABLE_NAME, self.PRIMARY_KEY, for_key)
