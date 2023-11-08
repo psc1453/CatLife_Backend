@@ -20,7 +20,7 @@ class DBTableProtocol(ABC):
 
     @property
     @abstractmethod
-    def PRIMARY_KEY(self):
+    def PRIMARY_KEYS(self):
         pass
 
     @property

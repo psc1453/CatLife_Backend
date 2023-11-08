@@ -24,6 +24,14 @@ class TableStoolRecords(DBTableProtocol):
     def EDITABLE_COLUMNS(self):
         return ['stool_timestamp', 'stool_status', 'stool_comment']
 
+    @property
+    def PRIMARY_KEYS(self):
+        return ['stool_id']
+
+    @property
+    def FOREIGN_KEYS(self):
+        return []
+
     def insert_record(self, insert_dict: dict):
         assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), \

@@ -14,6 +14,14 @@ class TableWeightRecords(DBTableProtocol):
     def EDITABLE_COLUMNS(self):
         return ['record_date', 'weight']
 
+    @property
+    def PRIMARY_KEYS(self):
+        return ['record_date']
+
+    @property
+    def FOREIGN_KEYS(self):
+        return []
+
     def insert_record(self, insert_dict: dict):
         assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), 'Find unsupported keys, only [record_date, weight] are supported'

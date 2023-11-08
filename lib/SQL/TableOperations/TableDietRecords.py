@@ -14,6 +14,14 @@ class TableDietRecords(DBTableProtocol):
     def EDITABLE_COLUMNS(self):
         return ['food_id', 'food_quantity', 'diet_timestamp']
 
+    @property
+    def PRIMARY_KEYS(self):
+        return ['diet_id']
+
+    @property
+    def FOREIGN_KEYS(self):
+        return ['food_id']
+
     def insert_record(self, insert_dict: dict):
         assert all((key in self.EDITABLE_COLUMNS) for key in list(
             insert_dict.keys())), \
