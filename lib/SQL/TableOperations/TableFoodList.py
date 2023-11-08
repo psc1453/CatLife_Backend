@@ -22,13 +22,6 @@ class TableFoodList(DBTableProtocol):
     def FOREIGN_KEYS(self):
         return []
 
-    def insert_record(self, insert_dict: dict):
-        assert all((key in self.EDITABLE_COLUMNS) for key in list(
-            insert_dict.keys())), \
-            'Find unsupported keys, only [food_brand, food_name, food_category, food_unit] are supported'
-
-        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
-
     def add_food_record(self, brand: str, name: str, category: str, unit: str):
         self.insert_record({'food_brand': brand,
                             'food_name': name,

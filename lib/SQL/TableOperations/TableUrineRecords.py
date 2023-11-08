@@ -30,13 +30,6 @@ class TableUrineRecords(DBTableProtocol):
     def FOREIGN_KEYS(self):
         return []
 
-    def insert_record(self, insert_dict: dict):
-        assert all((key in self.EDITABLE_COLUMNS) for key in list(
-            insert_dict.keys())), \
-            'Find unsupported keys, only [urine_timestamp, urine_status, urine_comment] are supported'
-
-        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
-
     def add_urine_record(self, timestamp: str = None, status: Union[UrineStatus, str] = UrineStatus.normal,
                          comment: str = None):
         """

@@ -28,9 +28,11 @@ class DBTableProtocol(ABC):
     def FOREIGN_KEYS(self):
         pass
 
-    @abstractmethod
     def insert_record(self, insert_dict: dict):
-        pass
+        assert all((key in self.EDITABLE_COLUMNS) for key in list(
+            insert_dict.keys())), f'Find unsupported keys, only {self.EDITABLE_COLUMNS} are supported'
+
+        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
 
     def fetch_record(self, for_key: Union[str, int]):
         table = self.db_instance.fetch_table_by_key(self.TABLE_NAME, self.PRIMARY_KEY, for_key)

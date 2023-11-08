@@ -22,13 +22,6 @@ class TableDietRecords(DBTableProtocol):
     def FOREIGN_KEYS(self):
         return ['food_id']
 
-    def insert_record(self, insert_dict: dict):
-        assert all((key in self.EDITABLE_COLUMNS) for key in list(
-            insert_dict.keys())), \
-            'Find unsupported keys, only [food_id, food_quantity, diet_timestamp] are supported'
-
-        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
-
     def add_diet_record(self, food_id: int, quantity: float, timestamp: str = None):
         """
 

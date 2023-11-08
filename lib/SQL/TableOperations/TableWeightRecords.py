@@ -22,12 +22,6 @@ class TableWeightRecords(DBTableProtocol):
     def FOREIGN_KEYS(self):
         return []
 
-    def insert_record(self, insert_dict: dict):
-        assert all((key in self.EDITABLE_COLUMNS) for key in list(
-            insert_dict.keys())), 'Find unsupported keys, only [record_date, weight] are supported'
-
-        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
-
     def add_weight_record(self, weight: float, date: str = None):
         """
 

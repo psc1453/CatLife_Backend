@@ -32,13 +32,6 @@ class TableStoolRecords(DBTableProtocol):
     def FOREIGN_KEYS(self):
         return []
 
-    def insert_record(self, insert_dict: dict):
-        assert all((key in self.EDITABLE_COLUMNS) for key in list(
-            insert_dict.keys())), \
-            'Find unsupported keys, only [stool_timestamp, stool_status, stool_comment] are supported'
-
-        self.db_instance.insert_row_to_table_by_dict(self.TABLE_NAME, insert_dict)
-
     def add_stool_record(self, timestamp: str = None, status: Union[StoolStatus, str] = StoolStatus.normal,
                          comment: str = None):
         """
