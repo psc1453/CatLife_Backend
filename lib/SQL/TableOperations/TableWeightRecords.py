@@ -15,8 +15,8 @@ class TableWeightRecords(DBTableProtocol):
         return ['record_date', 'weight']
 
     @property
-    def PRIMARY_KEYS(self):
-        return ['record_date']
+    def PRIMARY_KEY(self):
+        return 'record_date'
 
     @property
     def FOREIGN_KEYS(self):
@@ -38,8 +38,6 @@ class TableWeightRecords(DBTableProtocol):
         return table
 
     # TODO: Add the delete and update functions.
-    def delete_record(self, for_key: str):
-        pass
 
     def update_record(self, for_key: str, new_dict: dict):
         pass

@@ -25,8 +25,8 @@ class TableStoolRecords(DBTableProtocol):
         return ['stool_timestamp', 'stool_status', 'stool_comment']
 
     @property
-    def PRIMARY_KEYS(self):
-        return ['stool_id']
+    def PRIMARY_KEY(self):
+        return 'stool_id'
 
     @property
     def FOREIGN_KEYS(self):
@@ -49,8 +49,6 @@ class TableStoolRecords(DBTableProtocol):
         return table
 
     # TODO: Add the delete and update functions.
-    def delete_record(self, for_key: int):
-        pass
 
     def update_record(self, for_key: int, new_dict: dict):
         pass

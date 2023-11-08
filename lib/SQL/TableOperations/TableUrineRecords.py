@@ -23,8 +23,8 @@ class TableUrineRecords(DBTableProtocol):
         return ['urine_timestamp', 'urine_status', 'urine_comment']
 
     @property
-    def PRIMARY_KEYS(self):
-        return ['urine_id']
+    def PRIMARY_KEY(self):
+        return 'urine_id'
 
     @property
     def FOREIGN_KEYS(self):
@@ -47,8 +47,6 @@ class TableUrineRecords(DBTableProtocol):
         return table
 
     # TODO: Add the delete and update functions.
-    def delete_record(self, for_key: int):
-        pass
 
     def update_record(self, for_key: int, new_dict: dict):
         pass

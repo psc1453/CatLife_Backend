@@ -15,8 +15,8 @@ class TableDietRecords(DBTableProtocol):
         return ['food_id', 'food_quantity', 'diet_timestamp']
 
     @property
-    def PRIMARY_KEYS(self):
-        return ['diet_id']
+    def PRIMARY_KEY(self):
+        return 'diet_id'
 
     @property
     def FOREIGN_KEYS(self):
@@ -39,8 +39,6 @@ class TableDietRecords(DBTableProtocol):
         return table
 
     # TODO: Add the delete and update functions.
-    def delete_record(self, for_key: int):
-        pass
 
     def update_record(self, for_key: int, new_dict: dict):
         pass
