@@ -18,6 +18,16 @@ class DBTableProtocol(ABC):
     def EDITABLE_COLUMNS(self):
         pass
 
+    @property
+    @abstractmethod
+    def PRIMARY_KEY(self):
+        pass
+
+    @property
+    @abstractmethod
+    def FOREIGN_KEYS(self):
+        pass
+
     @abstractmethod
     def insert_record(self, insert_dict: dict):
         pass
