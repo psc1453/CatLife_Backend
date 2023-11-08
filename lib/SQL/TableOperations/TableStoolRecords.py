@@ -55,7 +55,6 @@ class TableStoolRecords(DBTableProtocol):
     def get_stool_records_all(self):
         return self.fetch_table()
 
-
     def get_stool_record_by_id(self, stool_id: int):
         return self.fetch_record(stool_id)
 

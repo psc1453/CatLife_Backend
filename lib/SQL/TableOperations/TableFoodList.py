@@ -31,7 +31,6 @@ class TableFoodList(DBTableProtocol):
     def get_food_records_all(self):
         return self.fetch_table()
 
-
     def get_food_products_all(self):
         command = f'''
             SELECT food_id, CONCAT_WS('-', food_brand, food_name) AS product_name
