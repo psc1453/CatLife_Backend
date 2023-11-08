@@ -1,6 +1,7 @@
 import pymysql
 
-from .utils import get_table_from_cursor, generate_insert_sql_from_dict, generate_delete_sql_from_key
+from .utils import get_table_from_cursor, generate_insert_sql_from_dict, generate_delete_sql_from_key, \
+    generate_update_sql_by_key_with_dict
 
 
 class DB:
@@ -79,3 +80,24 @@ class DB:
     def delete_row_from_table_by_key(self, table_name, key_name, key_value):
         command = generate_delete_sql_from_key(table_name, key_name, key_value)
         self.delete_row_from_table_by_command(command)
+
+    def update_row_in_table_by_command(self, command: str):
+        assert command.strip().upper().startswith(
+            'UPDATE'), 'Not a command for updating data which begins with UPDATE statement.'
+        db_connection = pymysql.connect(host=self.db_host, port=self.db_port, database=self.db_name, user=self.db_user,
+                                        password=self.db_password)
+        db_cursor = db_connection.cursor()
+        try:
+            db_cursor.execute(command)
+            db_connection.commit()
+        except Exception as error:
+            print('Failed updating row: ', error)
+            db_connection.rollback()
+            raise error
+
+        db_cursor.close()
+        db_connection.close()
+
+    def update_row_in_table_by_key_with_dict(self, table_name, key_name, key_value, update_dict):
+        command = generate_update_sql_by_key_with_dict(table_name, key_name, key_value, update_dict)
+        self.update_row_in_table_by_command(command)

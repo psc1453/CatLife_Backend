@@ -37,11 +37,6 @@ class TableWeightRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
-    # TODO: Add the delete and update functions.
-
-    def update_record(self, for_key: str, new_dict: dict):
-        pass
-
     def add_weight_record(self, weight: float, date: str = None):
         """
 
@@ -95,6 +90,9 @@ class TableWeightRecords(DBTableProtocol):
 
     def delete_weight_record_by_date(self, date: str):
         self.delete_record(date)
+
+    def update_weight_record_by_date_with_dict(self, date: str, update_dict: dict):
+        self.update_record(date, update_dict)
 
 
 def test():

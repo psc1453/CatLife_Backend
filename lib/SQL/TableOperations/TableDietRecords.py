@@ -38,11 +38,6 @@ class TableDietRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
-    # TODO: Add the delete and update functions.
-
-    def update_record(self, for_key: int, new_dict: dict):
-        pass
-
     def add_diet_record(self, food_id: int, quantity: float, timestamp: str = None):
         """
 
@@ -114,6 +109,9 @@ class TableDietRecords(DBTableProtocol):
 
     def delete_diet_record_by_id(self, diet_id: int):
         self.delete_record(diet_id)
+
+    def update_diet_record_by_id_with_dict(self, diet_id: int, update_dict: dict):
+        self.update_record(diet_id, update_dict)
 
 
 def test():

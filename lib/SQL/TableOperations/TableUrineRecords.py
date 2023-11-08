@@ -46,11 +46,6 @@ class TableUrineRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
-    # TODO: Add the delete and update functions.
-
-    def update_record(self, for_key: int, new_dict: dict):
-        pass
-
     def add_urine_record(self, timestamp: str = None, status: Union[UrineStatus, str] = UrineStatus.normal,
                          comment: str = None):
         """
@@ -129,6 +124,9 @@ class TableUrineRecords(DBTableProtocol):
 
     def delete_urine_record_by_id(self, urine_id: int):
         self.delete_record(urine_id)
+
+    def update_urine_record_by_id_with_dict(self, urine_id: int, update_dict: dict):
+        self.update_record(urine_id, update_dict)
 
 
 def test():

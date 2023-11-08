@@ -84,3 +84,16 @@ async def delete_weight_record_by_date(date: str):
     else:
         status_dict = {"deleted": date, "message": "ok"}
         return status_dict
+
+
+@weight_router.put('/update_weight_record_by_date_with_dict/{date}')
+async def update_weight_record_by_date_with_dict(date: str, update_dict: dict):
+    try:
+        table_weight.update_weight_record_by_date_with_dict(date, update_dict)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"updated": {"date": date, "value": update_dict}, "message": "ok"}
+        return status_dict

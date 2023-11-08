@@ -39,6 +39,5 @@ class DBTableProtocol(ABC):
     def delete_record(self, for_key: Union[str, int]):
         self.db_instance.delete_row_from_table_by_key(self.TABLE_NAME, self.PRIMARY_KEY, for_key)
 
-    @abstractmethod
-    def update_record(self, for_key: Union[str, int], new_dict: dict):
-        pass
+    def update_record(self, for_key: Union[str, int], update_dict: dict):
+        self.db_instance.update_row_in_table_by_key_with_dict(self.TABLE_NAME, self.PRIMARY_KEY, for_key, update_dict)

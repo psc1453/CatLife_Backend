@@ -73,3 +73,16 @@ async def delete_food_record_by_id(food_id: int):
     else:
         status_dict = {"deleted": food_id, "message": "ok"}
         return status_dict
+
+
+@food_router.put('/update_food_record_by_id_with_dict/{food_id}')
+async def update_food_record_by_date_with_dict(food_id: int, update_dict: dict):
+    try:
+        table_food.update_food_record_by_id_with_dict(food_id, update_dict)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"updated": {"food_id": food_id, "value": update_dict}, "message": "ok"}
+        return status_dict

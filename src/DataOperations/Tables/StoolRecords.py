@@ -91,3 +91,16 @@ async def delete_stool_record_by_id(stool_id: int):
     else:
         status_dict = {"deleted": stool_id, "message": "ok"}
         return status_dict
+
+
+@stool_router.put('/update_stool_record_by_id_with_dict/{stool_id}')
+async def update_stool_record_by_date_with_dict(stool_id: int, update_dict: dict):
+    try:
+        table_stool.update_stool_record_by_id_with_dict(stool_id, update_dict)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"updated": {"stool_id": stool_id, "value": update_dict}, "message": "ok"}
+        return status_dict

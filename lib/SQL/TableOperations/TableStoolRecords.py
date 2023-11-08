@@ -48,11 +48,6 @@ class TableStoolRecords(DBTableProtocol):
         table = self.db_instance.fetch_table_by_command(command)
         return table
 
-    # TODO: Add the delete and update functions.
-
-    def update_record(self, for_key: int, new_dict: dict):
-        pass
-
     def add_stool_record(self, timestamp: str = None, status: Union[StoolStatus, str] = StoolStatus.normal,
                          comment: str = None):
         """
@@ -131,6 +126,9 @@ class TableStoolRecords(DBTableProtocol):
 
     def delete_stool_record_by_id(self, stool_id: int):
         self.delete_record(stool_id)
+
+    def update_stool_record_by_id_with_dict(self, stool_id: int, update_dict: dict):
+        self.update_record(stool_id, update_dict)
 
 
 def test():

@@ -91,3 +91,16 @@ async def delete_urine_record_by_id(urine_id: int):
     else:
         status_dict = {"deleted": urine_id, "message": "ok"}
         return status_dict
+
+
+@urine_router.put('/update_urine_record_by_id_with_dict/{urine_id}')
+async def update_urine_record_by_date_with_dict(urine_id: int, update_dict: dict):
+    try:
+        table_urine.update_urine_record_by_id_with_dict(urine_id, update_dict)
+    except Exception as error:
+        print(error)
+        message = {"message": str(error)}
+        return message
+    else:
+        status_dict = {"updated": {"urine_id": urine_id, "value": update_dict}, "message": "ok"}
+        return status_dict

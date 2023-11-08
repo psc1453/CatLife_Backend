@@ -40,6 +40,16 @@ Accept: application/json
 
 ###
 
+PUT http://127.0.0.1:8000/tables/weight/update_weight_record_by_date_with_dict/2023-10-24
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "weight": 40
+}
+
+###
+
 DELETE http://127.0.0.1:8000/tables/weight/delete_weight_record_by_date/2020-01-02
 Accept: application/json
 
@@ -80,6 +90,17 @@ Accept: application/json
 
 ###
 
+PUT http://127.0.0.1:8000/tables/urine/update_urine_record_by_id_with_dict/53
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "urine_status": "normal",
+  "urine_comment": "nothing"
+}
+
+###
+
 DELETE http://127.0.0.1:8000/tables/urine/delete_urine_record_by_id/55
 Accept: application/json
 
@@ -115,6 +136,16 @@ Accept: application/json
   "stool_timestamp": "2020-01-02 00:00:00",
   "stool_status": "normal",
   "stool_comment": "very good"
+}
+
+###
+
+PUT http://127.0.0.1:8000/tables/stool/update_stool_record_by_id_with_dict/40
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "stool_status": "normal"
 }
 
 ###
@@ -159,6 +190,16 @@ Accept: application/json
 
 ###
 
+PUT http://127.0.0.1:8000/tables/food/update_food_record_by_id_with_dict/16
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "food_brand": "HATA-Japan"
+}
+
+###
+
 DELETE http://127.0.0.1:8000/tables/food/delete_food_record_by_id/17
 Accept: application/json
 
@@ -194,6 +235,16 @@ Accept: application/json
   "food_id": 1,
   "food_quantity": 10,
   "diet_timestamp": "2023-11-08 00:09:59"
+}
+
+###
+
+PUT http://127.0.0.1:8000/tables/diet/update_diet_record_by_id_with_dict/73
+Content-Type: application/json;charset=utf-8
+Accept: application/json
+
+{
+  "food_quantity": 5
 }
 
 ###
