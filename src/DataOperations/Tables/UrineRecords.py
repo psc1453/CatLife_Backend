@@ -10,7 +10,7 @@ from lib.Web.utils import table_to_dict
 
 
 class UrineRecordModel(BaseModel):
-    urine_timestamp: str
+    urine_timestamp: str = 'DEFAULT'
     urine_status: str = 'normal'
     urine_comment: str = None
 

@@ -10,7 +10,7 @@ from lib.Web.utils import table_to_dict
 
 
 class StoolRecordModel(BaseModel):
-    stool_timestamp: str
+    stool_timestamp: str = 'DEFAULT'
     stool_status: str = 'normal'
     stool_comment: str = None
 

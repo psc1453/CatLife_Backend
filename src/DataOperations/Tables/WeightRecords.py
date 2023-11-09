@@ -10,7 +10,7 @@ from lib.Web.utils import table_to_dict
 
 
 class WeightRecordModel(BaseModel):
-    record_date: str
+    record_date: str = 'DEFAULT'
     weight: float
 
     @validator('record_date')

@@ -12,7 +12,7 @@ from lib.Web.utils import table_to_dict
 class DietRecordModel(BaseModel):
     food_id: int
     food_quantity: int
-    diet_timestamp: str = None
+    diet_timestamp: str = 'DEFAULT'
 
     @validator('diet_timestamp')
     def is_valid_timestamp(cls, input_timestamp):
