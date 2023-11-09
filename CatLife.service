@@ -1,0 +1,10 @@
+[Unit]
+Description=CatLife Backend Service
+After=multi-user.target
+[Service]
+Type=simple
+Restart=always
+User=root
+ExecStart=/root/miniconda2/envs/CatLife/bin/python /root/Server-Apps/CatLife/CatLife_Backend/main.py
+[Install]
+WantedBy=multi-user.target
