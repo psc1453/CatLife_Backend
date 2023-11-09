@@ -2,16 +2,16 @@ from fastapi import FastAPI
 
 from src.DataOperations import DataOperationsRouter
 
-app = FastAPI()
-app.include_router(DataOperationsRouter.table_router)
-app.include_router(DataOperationsRouter.summary_router)
+CatLife_Backend = FastAPI()
+CatLife_Backend.include_router(DataOperationsRouter.table_router)
+CatLife_Backend.include_router(DataOperationsRouter.summary_router)
 
 
-@app.get("/")
+@CatLife_Backend.get("/")
 async def root():
     return {"message": "Hello World"}
 
 
-@app.post("/hello/{name}")
+@CatLife_Backend.post("/hello/{name}")
 async def say_hello(name: str):
     return {"message": f"Hello {name}"}
