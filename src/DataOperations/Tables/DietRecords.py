@@ -11,7 +11,7 @@ from lib.Web.utils import table_to_dict
 
 class DietRecordModel(BaseModel):
     food_id: int
-    food_quantity: int
+    food_quantity: float
     diet_timestamp: str = 'DEFAULT'
 
     @validator('diet_timestamp')

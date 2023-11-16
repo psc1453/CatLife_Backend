@@ -232,7 +232,7 @@ Accept: application/json
 
 {
   "food_id": 1,
-  "food_quantity": 10,
+  "food_quantity": 0.25,
   "diet_timestamp": "2023-11-08 00:09:59"
 }
 
